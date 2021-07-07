@@ -99,19 +99,19 @@ class AsignaturaTestCase ( unittest.TestCase ) :
         self.session.commit ( )
         self.session.close ( )
 
-    def test_agregar_equipo ( self ) :
-        resultado = self.sorteo.agregar_equipo ( denominacionEquipo="Equipo9999")
+    def test_agregar_asignatura ( self ) :
+        resultado = self.sorteo.agregar_asignatura ( nombreAsignatura = "Estructura de datos" )
         self.assertEqual ( resultado , True )
 
-    def test_agregar_equipo_repetido(self):
-        resultado = self.sorteo.agregar_equipo( denominacionEquipo="Equipo01")
+    def test_agregar_asignatura_repetido(self):
+        resultado = self.sorteo.agregar_asignatura(nombreAsignatura = "Pruebas de software")
         self.assertNotEqual(resultado, True)
 
-    def test_verificar_almacenamiento_agregar_equipo ( self ):
+    def test_verificar_almacenamiento_agregar_asignatura ( self ):
         self.session=Session()
-        equipo=self.session.query(Equipo).filter(Equipo.denominacionEquipo == "Equipo01").first()
-        self.assertEqual("Equipo01", equipo.denominacionEquipo)
+        asignatura=self.session.query(Asignatura).filter(Asignatura.nombreAsignatura == "Pruebas de software").first()
+        self.assertEqual("Pruebas de software", asignatura.nombreAsignatura)
 
-    def test_agregar_equipo_vacio ( self ) :
-        resultado = self.sorteo.agregar_equipo(denominacionEquipo="")
+    def test_agregar_asignatura_vacio ( self ) :
+        resultado = self.sorteo.agregar_asignatura(nombreAsignatura="")
         self.assertFalse(resultado)
